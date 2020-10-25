@@ -4,9 +4,10 @@
   "description": "serve",
   "main": "index.js",
   "scripts": {
-    "ts-node": "ts-node src/index.ts",
+    "ts-node": "ts-node src/app.ts",
     "build": "tsc",
-    "exec": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "exec": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "KatagiriSo",
@@ -18,6 +19,10 @@
     "typescript": "^4.0.3"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "@types/mongoose": "^5.7.36",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.10"
   }
 }
