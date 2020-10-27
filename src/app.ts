@@ -1,5 +1,8 @@
 import express from 'express';
+import session from 'express-session';
 import Mongoose from "mongoose";
+import passport from 'passport';
+import { Auth } from './auth';
 const app: express.Express = express()
 const port = process.env.PORT || 3000
 
@@ -23,11 +26,19 @@ app.use((req, res, next) => {
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 const router = require('./route/v1/')
-console.log("router"+router)
+console.log("router" + router)
+app.use('/api/v1/login', require('./login'))
 app.use('/api/v1/', router)
-
 
 // app.get('/', (req, res) => {
 //     res.send('Hello World2!')

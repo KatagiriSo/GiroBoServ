@@ -1,9 +1,10 @@
 import express from 'express';
+import { Auth } from '../../auth';
 import UserModel from "./../../models/userModel"
 const router = express.Router()
 
 
-router.get('/', (req, res) => {
+router.get('/', Auth.isAuthenticated, (req, res) => {
     UserModel
         .find()
         .then((users) => {
@@ -11,7 +12,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', Auth.isAuthenticated, (req, res) => {
     const userId = req.params.id;
     UserModel
         .findById(userId, (err, user) => {
@@ -19,7 +20,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', Auth.isAuthenticated, (req, res) => {
 
     let user = new UserModel()
     console.log("1")
@@ -48,7 +49,7 @@ router.post('/', (req, res) => {
 
 
 
-router.put('/:id', (req, res) => {
+router.put('/:id', Auth.isAuthenticated, (req, res) => {
     const userId = req.params.id
     UserModel
         .findById(userId, (err, user) => {

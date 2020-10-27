@@ -1,9 +1,10 @@
 import express from 'express';
+import { Auth } from '../../auth';
 import ArticleModel from '../../models/articleModel';
 
 const router = express.Router()
 
-router.post('/', (req, res) => {
+router.post('/', Auth.isAuthenticated, (req, res) => {
     
     let article = new ArticleModel()
 
@@ -21,7 +22,7 @@ router.post('/', (req, res) => {
 
 })
 
-router.get('/', (req, res) => {
+router.get('/', Auth.isAuthenticated, (req, res) => {
     ArticleModel
         .find()
         .then((articles) => {
@@ -29,7 +30,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', Auth.isAuthenticated, (req, res) => {
     const articleId = req.params.id
     ArticleModel
         .findById(articleId, (err, article) => {
@@ -37,7 +38,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', Auth.isAuthenticated, (req, res) => {
     const articleId = req.params.id
     ArticleModel.remove({ _id: articleId })
         .then(() => {
