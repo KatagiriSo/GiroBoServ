@@ -44,3 +44,7 @@ mongod --config /usr/local/etc/mongod.conf
 
 ## 
 sudo mongod --dbpath /var/db/mongo/
+
+## iOSからローカルサーバ
+https://tech.connehito.com/entry/2015/12/10/180006
+KatagiriSO.local

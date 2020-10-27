@@ -2,17 +2,18 @@ import express from "express"
 import passport, { Passport, use } from "passport"
 import { Strategy } from "passport-local"
 import { nextTick } from "process"
+import * as bcrypt from "bcrypt"
 
 const router: express.Router = express.Router()
 const user1 = {
     name: "Taro",
-    password: "Taro123"
+    password: bcrypt.hashSync("Taro123",10)
 }
 
 passport.use(new Strategy((username, password, done) => {
     if (username !== user1.name) {
         return done(null, false)
-    } else if (password !== user1.password) {
+    } else if (!bcrypt.compareSync(password, user1.password)) {
         return done(null, false)
     } else {
         return done(null, {username:username, password:password})
