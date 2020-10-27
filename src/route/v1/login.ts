@@ -29,8 +29,6 @@ passport.deserializeUser((user, done) => {
     done(null, user)
 })
 
-
-
 router.get('/', (req, res) => {
     console.log(req.session);
     res.json({"message":"do login"})
@@ -55,10 +53,7 @@ router.post('/', (req, res, next) => {
     }
 )
 
-router.post('/logout', (req, res) => {
-    req.logout();
-    res.json({ "message": "success" });
-})
+
 
 module.exports = router
 

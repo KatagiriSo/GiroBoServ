@@ -37,7 +37,6 @@ app.use(passport.session())
 
 const router = require('./route/v1/')
 console.log("router" + router)
-app.use('/api/v1/login', require('./login'))
 app.use('/api/v1/', router)
 
 // app.get('/', (req, res) => {
